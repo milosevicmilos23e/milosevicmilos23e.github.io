@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miloš Milošević - Operations Analytics & Optimization</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu:wght=400;500;700&family=Roboto+Mono:wght=300;400;500&family=Roboto:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/nav.css">
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="./index.html" class="nav-logo-link">
+      <img src="./assets/logo23.png" alt="Logo" class="nav-logo-img">
+    </a>
+    <ul class="nav-links">
+      <li class="dropdown">
+        <a href="./index.html#projects">Projects <span class="dropdown-caret">▼</span></a>
+        <ul class="dropdown-menu">
+          <li><a href="./demand-profiler.html"><span class="menu-title">SC Demand Profiler</span><span
+                class="menu-desc">Ingestion &amp; Profiling Suite</span></a></li>
+          <li><a href="./production-scheduler.html"><span class="menu-title">Production Scheduler</span><span
+                class="menu-desc">Constraint Optimization</span></a></li>
+          <li><a href="./multi-warehouse-solver.html"><span class="menu-title">Transport Optimizer</span><span
+                class="menu-desc">Network Routing</span></a></li>
+          <li><a href="./inventory-control.html"><span class="menu-title">Inventory Framework</span><span
+                class="menu-desc">EOQ Simulations</span></a></li>
+        </ul>
+      </li>
+      <li><a href="./index.html#experience">Experience</a></li>
+      <li><a href="./index.html#stack">Stack</a></li>
+      <li><a href="./index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-status">
+      <div class="status-dot"></div>
+      Available for remote
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Operations Analytics</div>
+      <h1 class="hero-name">Miloš<br>Milošević</h1>
+      <div class="hero-title">Supply Chain Analytics & Optimization Engineer</div>
+
+      <div class="typing-badge">
+        <span class="typing-badge-label">./focus.sh</span>
+        <span class="typing-text" id="typing-text"></span><span class="cursor"></span>
+      </div>
+
+      <p class="hero-desc">
+        I build <strong>operational intelligence systems</strong> - combining supply chain domain expertise, discrete
+        optimization, and data engineering to turn messy real-world problems into working solutions.<br><br>
+        Not dashboards that live in a folder. Systems that change how a team runs their week.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="https://github.com/milosevicmilos23e" target="_blank" class="btn-ghost">GitHub Profile</a>
+        <a href="#contact" class="btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="topology-label" id="matrix-label">// integrated operations pipeline - telemetry matrices</div>
+      <div class="topology-grid" id="topo-grid"></div>
+      <div class="topo-legend">
+        <div class="legend-item">
+          <div class="legend-dot" style="background: var(--brand)"></div>
+          Data Flow
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: var(--accent); border-radius: 50%"></div>
+          Active Optimizer
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: var(--silver-faint); border: 1px solid var(--border-silver)"></div>
+          System Process
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KPI STRIP -->
+  <div class="kpi-section">
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-label">Data Infrastructure</div>
+        <div class="kpi-value">Relational Modeling &amp; ETL</div>
+        <div class="kpi-sub">SQLite · InfluxDB · PostgreSQL</div>
+        <div class="kpi-badge">46 machines mapped</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Operations Optimization</div>
+        <div class="kpi-value">Constraint &amp; Route Solving</div>
+        <div class="kpi-sub">OR-Tools · K-Means · ABC/XYZ</div>
+        <div class="kpi-badge">€65k+ proven impact</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Decision Support UIs</div>
+        <div class="kpi-value">Streamlit &amp; Production Controls</div>
+        <div class="kpi-sub">Automated Reporting · Real-time Tooling</div>
+        <div class="kpi-badge">Near-perfect plan adherence</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIPELINE / PROJECTS -->
+  <section id="projects">
+    <div class="section-header">
+      <div class="section-eyebrow">Portfolio</div>
+      <h2 class="section-title">Operations Intelligence Suite</h2>
+    </div>
+
+    <div class="pipeline-section">
+      <!-- Arrow row above -->
+      <div class="pipeline-arrow-row" style="margin-bottom: 8px; pointer-events:none;">
+        <div class="p-arrow">
+          <div class="p-arrow-inner">
+            <div class="arrow-line"></div>
+            <div class="arrow-head">▶</div>
+          </div>
+        </div>
+        <div class="p-arrow">
+          <div class="p-arrow-inner">
+            <div class="arrow-line"></div>
+            <div class="arrow-head">▶</div>
+          </div>
+        </div>
+        <div class="p-arrow">
+          <div class="p-arrow-inner">
+            <div class="arrow-line"></div>
+            <div class="arrow-head">▶</div>
+          </div>
+        </div>
+        <div class="p-arrow last"></div>
+      </div>
+
+      <div class="pipeline-nodes">
+        <div class="pipeline-node">
+          <div class="node-step"><span class="node-step-num">P1</span> Ingestion · Profiling</div>
+          <div class="node-title">SC Demand Profiler</div>
+          <div class="node-subtitle">sc-demand-profiler</div>
+          <p class="node-desc">
+            ADI/CV demand classification (Smooth / Lumpy / Intermittent / Erratic), ABC/XYZ segmentation, K-Means
+            product clustering, and adaptive forecast comparison - wrapped in a Streamlit app with CSV upload.
+          </p>
+          <div class="node-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Scikit-learn</span>
+            <span class="tag">Streamlit</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">SQLite</span>
+          </div>
+          <a href="https://github.com/milosevicmilos23e/sc-demand-profiler" target="_blank" class="node-link">View on
+            GitHub </a>
+          <a href="./demand-profiler.html" target="_blank" class="node-link">Project Details </a>
+        </div>
+
+        <div class="pipeline-node">
+          <div class="node-step"><span class="node-step-num">P2</span> Constraint · Scheduling</div>
+          <div class="node-title">Production Scheduler</div>
+          <div class="node-subtitle">prod-scheduling-optimizer</div>
+          <p class="node-desc">
+            Constraint-based daily scheduling for multi-machine production environments. Capacity, labor, maintenance,
+            shift planning, scrap and downtime tracking - the 46-machine problem rebuilt as a reusable OR tool.
+          </p>
+          <div class="node-tags">
+            <span class="tag">OR-Tools</span>
+            <span class="tag">Python</span>
+            <span class="tag">PuLP</span>
+            <span class="tag">Streamlit</span>
+          </div>
+          <a href="https://github.com/milosevicmilos23e" target="_blank" class="node-link">Coming Soon </a>
+        </div>
+
+        <div class="pipeline-node">
+          <div class="node-step"><span class="node-step-num">P3</span> Network · Warehouse Transfers</div>
+          <div class="node-title">Transport Optimizer</div>
+          <div class="node-subtitle">warehouse-transport-optimizer</div>
+          <p class="node-desc">
+            Cross-warehouse SMOG/stockout imbalance solver. 26-route network, scenario baseline vs optimized comparison
+            with cost delta output. Projected €15k/yr holding cost savings from real operational data.
+          </p>
+          <div class="node-tags">
+            <span class="tag">OR-Tools</span>
+            <span class="tag">Python</span>
+            <span class="tag">NetworkX</span>
+            <span class="tag">Plotly</span>
+          </div>
+          <a href="https://github.com/milosevicmilos23e" target="_blank" class="node-link">Coming Soon </a>
+        </div>
+
+        <div class="pipeline-node">
+          <div class="node-step"><span class="node-step-num">P4</span> Financial · Simulation</div>
+          <div class="node-title">Inventory Framework</div>
+          <div class="node-subtitle">sc-inventory-framework</div>
+          <p class="node-desc">
+            Interactive EOQ, newsvendor, base stock, and backorder model calculator. Parameter sliders, visual
+            sensitivity outputs. Useful to SC practitioners and students - built to generate organic traffic.
+          </p>
+          <div class="node-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Streamlit</span>
+            <span class="tag">NumPy</span>
+            <span class="tag">Plotly</span>
+          </div>
+          <a href="https://github.com/milosevicmilos23e" target="_blank" class="node-link">Coming Soon </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-header" style="border-top: 1px solid var(--border);">
+      <div class="section-eyebrow">Work History</div>
+      <h2 class="section-title">Proven Operational Impact</h2>
+    </div>
+
+    <div class="experience-section">
+      <div class="exp-grid">
+        <div class="exp-timeline">
+          <div class="exp-period">
+            <div class="exp-period-company">Valvoline</div>
+            Jun 2024 -<br>Sep 2025<br><br>
+            <span style="color: var(--text-muted); font-size:9px;">Kruševac, Serbia<br>On-site / International</span>
+          </div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-role">Sourcing & Scheduling Coordinator</div>
+          <div class="exp-actual-role">// De facto: Operations Analytics & Planning Specialist</div>
+          <ul class="exp-bullets">
+            <li>Built an end-to-end daily scheduling system from scratch covering <strong>46 production
+                machines</strong> - capacity planning, shift &amp; labor, maintenance estimates, downtime tracking, and
+              plan fulfillment - giving the Operations Manager executive-level visibility where none previously existed
+            </li>
+            <li>Achieved <strong>near-perfect production plan adherence</strong> despite operating at <span
+                class="exp-metric">19% forecast accuracy</span> through scheduling logic, KPI design, and analytical
+              controls (Plan Adherence, MoI, Attainment)</li>
+            <li>Identified a cross-warehouse inventory misclassification (SMOG in one location = stockout in another) -
+              a single product track correction freed <span class="exp-metric">~€50,000</span> in working capital</li>
+            <li>Developed a transportation optimization model for <strong>26 warehouse routes</strong>, recommending 6
+              truck movements that projected <span class="exp-metric">€15k+/yr</span> in holding cost savings</li>
+            <li>Designed a demand profiling system using <strong>K-Means clustering, ADI/CV classification</strong>,
+              ABC/XYZ segmentation, and adaptive forecasting - validated against real Demand Planner forecasts</li>
+            <li>Maintained weekly Master SKU report across <strong>2,000+ active products</strong> with 50+ analytical
+              dimensions; supported portfolio rationalization, SMOG risk identification, and PLM decisions</li>
+            <li>Contributed analytics to an A3 project on raw materials obsolescence - identified <span
+                class="exp-metric">5.5M+ RSD</span> in liquidity across two pilot months from RM resale tracking and
+              waste optimization</li>
+            <li>Led <strong>S&amp;OE and S&amp;OP meetings</strong> with cross-functional stakeholders; drove ~15%
+              availability improvement; represented planning during international gemba visits to Valvoline Netherlands
+              and FrieslandCampina Ghent</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid var(--border-silver); margin-top: 48px; padding-top: 48px;">
+        <div class="exp-grid">
+          <div class="exp-timeline">
+            <div class="exp-period">
+              <div class="exp-period-company">Freelance</div>
+              2015 - 2023<br><br>
+              <span style="color: var(--text-muted); font-size:9px;">Various clients<br>Serbia</span>
+            </div>
+          </div>
+          <div class="exp-content">
+            <div class="exp-role">Software Developer</div>
+            <div class="exp-actual-role">// .NET · PHP · JS · Arduino/ESP32 · Embedded Systems</div>
+            <ul class="exp-bullets">
+              <li>Designed and deployed custom automation solutions, tracking applications, and industrial interfaces
+                for independent local operations</li>
+              <li>Configured custom telemetry logging pipelines using microcontroller frameworks for field sensor
+                mapping and warehouse processing environments</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK SECTION -->
+  <section id="stack" class="stack-section">
+    <div class="section-header" style="padding: 0 0 40px 0;">
+      <div class="section-eyebrow">Technical Capabilities</div>
+      <h2 class="section-title">The Engineering Stack</h2>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="stack-card-title">Analytics &amp; Optimization</div>
+        <div class="stack-items">
+          <span class="stack-item highlight">Python</span>
+          <span class="stack-item highlight">Google OR-Tools</span>
+          <span class="stack-item">Pandas</span>
+          <span class="stack-item">NumPy</span>
+          <span class="stack-item">Scikit-learn</span>
+          <span class="stack-item">PuLP</span>
+          <span class="stack-item">NetworkX</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-title">Data Layers &amp; BI</div>
+        <div class="stack-items">
+          <span class="stack-item highlight">SQL (PostgreSQL)</span>
+          <span class="stack-item">SQLite</span>
+          <span class="stack-item">Power BI / DAX</span>
+          <span class="stack-item">Power Query</span>
+          <span class="stack-item">Advanced Excel</span>
+          <span class="stack-item">InfluxDB</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-title">Apps &amp; Architecture</div>
+        <div class="stack-items">
+          <span class="stack-item highlight">Streamlit</span>
+          <span class="stack-item">Docker</span>
+          <span class="stack-item">FastAPI</span>
+          <span class="stack-item">Git</span>
+          <span class="stack-item">Linux Bash</span>
+          <span class="stack-item">Embedded C/C++</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+    <div class="contact-inner">
+      <div class="section-eyebrow">Get In Touch</div>
+      <h2 class="section-title" style="margin-bottom: 20px;">Let's Optimize Your Operation</h2>
+      <p class="contact-desc">
+        Looking for a developer who understands capacity constraints, safety stock rules, and operational workflows?
+        Let's talk about building systems that scale your visibility and execution.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:milosevic.milos.v@gmail.com" class="btn-primary">Email Me Directly</a>
+        <a href="https://linkedin.com/in/miloš-milošević-b44122116" target="_blank" class="btn-ghost">Connect on
+          LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-copy">&copy; 2026 Miloš Milošević. Built for systems integrity.</div>
+    <div class="footer-links">
+      <a href="https://github.com/milosevicmilos23e" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/miloš-milošević-b44122116" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+
+  <!-- SYSTEM SCRIPTS -->
+  <script>
+    // 1. TYPING TEXT ENGINE
+    const phrases = [
+      "discrete_optimization_models.py",
+      "constraint_production_scheduling.sh",
+      "multi_warehouse_routing_matrix.go",
+      "adaptive_demand_segmentation.ts"
+    ];
+    let currentPhraseIdx = 0;
+    let currentLetterIdx = 0;
+    let isDeleting = false;
+    const typingSpeed = 70;
+    const backspaceSpeed = 30;
+    const holdTime = 2500;
+    const targetEl = document.getElementById("typing-text");
+
+    function processTyping() {
+      let currentFullText = phrases[currentPhraseIdx];
+      if (!isDeleting) {
+        targetEl.textContent = currentFullText.substring(0, currentLetterIdx + 1);
+        currentLetterIdx++;
+        if (currentLetterIdx === currentFullText.length) {
+          isDeleting = true;
+          setTimeout(processTyping, holdTime);
+        } else {
+          setTimeout(processTyping, typingSpeed);
+        }
+      } else {
+        targetEl.textContent = currentFullText.substring(0, currentLetterIdx - 1);
+        currentLetterIdx--;
+        if (currentLetterIdx === 0) {
+          isDeleting = false;
+          currentPhraseIdx = (currentPhraseIdx + 1) % phrases.length;
+          setTimeout(processTyping, 400);
+        } else {
+          setTimeout(processTyping, backspaceSpeed);
+        }
+      }
+    }
+    setTimeout(processTyping, 500);
+
+    // 2. HERO INTEGRATED MATRIX ANIMATION
+    const gridContainer = document.getElementById("topo-grid");
+    const labelContainer = document.getElementById("matrix-label");
+    const rowCount = 6;
+    const colCount = 8;
+    const cellTotal = rowCount * colCount;
+
+    // Operational phase labels to show dynamic system consolidation
+    const operationalLabels = [
+      "// portfolio engine - profiling raw demand patterns",
+      "// portfolio engine - resolving job constraints & machines",
+      "// portfolio engine - minimizing network transit overhead",
+      "// portfolio engine - calculating safety stock thresholds"
+    ];
+    let labelIndex = 0;
+    setInterval(() => {
+      labelIndex = (labelIndex + 1) % operationalLabels.length;
+      labelContainer.textContent = operationalLabels[labelIndex];
+    }, 5000);
+
+    // Structural blueprint definition for the multi-system flow grid
+    const cellBlueprints = [
+      'E', 'E', 'NH', 'NH', 'E', 'E', 'E', 'E',
+      'N', 'CH', 'AN', 'E', 'V', 'E', 'F', 'E',
+      'E', 'E', 'V', 'E', 'NV', 'E', 'FM', 'E',
+      'F', 'E', 'NV', 'E', 'N', 'CH', 'AN', 'E',
+      'FM', 'E', 'N', 'CH', 'AN', 'E', 'V', 'E',
+      'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'
+    ];
+
+    function renderOperationalMatrix() {
+      gridContainer.innerHTML = '';
+      for (let i = 0; i < cellTotal; i++) {
+        const cell = document.createElement('div');
+        cell.classList.add('topo-cell');
+        const code = cellBlueprints[i] || 'E';
+
+        if (code === 'E') {
+          cell.classList.add('empty');
+        } else if (code === 'N') {
+          cell.classList.add('node');
+          const inner = document.createElement('div');
+          inner.classList.add('node-dot');
+          cell.appendChild(inner);
+        } else if (code === 'AN') {
+          cell.classList.add('node', 'active-node');
+          const inner = document.createElement('div');
+          inner.classList.add('node-dot');
+          cell.appendChild(inner);
+        } else if (code === 'NH') {
+          cell.classList.add('node', 'accent-node');
+          cell.textContent = "OPT";
+        } else if (code === 'NV') {
+          cell.classList.add('node');
+          cell.textContent = "SYS";
+        } else if (code === 'CH') {
+          cell.classList.add('connector-h', 'streaming');
+        } else if (code === 'V') {
+          cell.classList.add('connector-v');
+        } else if (code === 'F') {
+          cell.classList.add('filled');
+        } else if (code === 'FM') {
+          cell.classList.add('filled-mid');
+        }
+        gridContainer.appendChild(cell);
+      }
+    }
+    renderOperationalMatrix();
+
+    // Procedural background telemetry simulation loop
+    setInterval(() => {
+      const cells = document.querySelectorAll('.topo-cell.node');
+      if (cells.length > 0) {
+        const luckyNode = cells[Math.floor(Math.random() * cells.length)];
+        luckyNode.style.borderColor = "var(--accent)";
+        luckyNode.style.boxShadow = "0 0 10px rgba(247,227,121,0.4)";
+        setTimeout(() => {
+          luckyNode.style.borderColor = "";
+          luckyNode.style.boxShadow = "";
+        }, 800);
+      }
+    }, 1200);
+  </script>
+</body>
+
+</html>

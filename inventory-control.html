@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deterministic & Stochastic Inventory Control Framework</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&family=Roboto+Mono:wght@300;400;500&family=Roboto:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/nav.css">
+
+  <link rel="stylesheet" href="./css/inventory-control.css">
+</head>
+
+<body>
+
+  <!-- TOP NAVIGATION -->
+  <nav>
+    <a href="./index.html" class="nav-logo-link">
+      <img src="./assets/logo23.png" alt="Logo" class="nav-logo-img">
+    </a>
+    <ul class="nav-links">
+      <li class="dropdown">
+        <a href="./index.html#projects">Projects <span class="dropdown-caret">▼</span></a>
+        <ul class="dropdown-menu">
+          <li><a href="./demand-profiler.html"><span class="menu-title">SC Demand Profiler</span><span
+                class="menu-desc">Ingestion &amp; Profiling Suite</span></a></li>
+          <li><a href="./production-scheduler.html"><span class="menu-title">Production Scheduler</span><span
+                class="menu-desc">Constraint Optimization</span></a></li>
+          <li><a href="./multi-warehouse-solver.html"><span class="menu-title">Transport Optimizer</span><span
+                class="menu-desc">Network Routing</span></a></li>
+          <li><a href="./inventory-control.html"><span class="menu-title">Inventory Framework</span><span
+                class="menu-desc">EOQ Simulations</span></a></li>
+        </ul>
+      </li>
+      <li><a href="./index.html#experience">Experience</a></li>
+      <li><a href="./index.html#stack">Stack</a></li>
+      <li><a href="./index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-status">
+      <div class="status-dot"></div>Engine Realtime Core
+    </div>
+  </nav>
+
+  <!-- HERO COMPONENT -->
+  <header class="hero-container">
+    <div class="hero-eyebrow">Decision Support Engine</div>
+    <h1 class="hero-title">Multi-Model Inventory Control Framework</h1>
+    <p class="hero-desc">
+      An interactive simulation space pairing mathematical constraints with structural sensitivity outputs. Adjust
+      continuous parameter vectors to map cost tradeoffs, service levels, and replenishment triggers across
+      deterministic and stochastic inventory horizons.
+    </p>
+  </header>
+
+  <!-- APPLICATION WORKSPACE -->
+  <main class="workspace-grid" id="engine">
+
+    <!-- CONTROLS COLUMN (LEFT) -->
+    <section class="controls-sidebar">
+      <div class="model-selector">
+        <button class="model-btn active" onclick="switchModel('eoq')">Economic Order Quantity</button>
+        <button class="model-btn" onclick="switchModel('newsvendor')">Stochastic Newsvendor</button>
+        <button class="model-btn" onclick="switchModel('basestock')">Continuous Base Stock</button>
+        <button class="model-btn" onclick="switchModel('backorder')">Planned Backorder Model</button>
+      </div>
+
+      <!-- EOQ INPUTS -->
+      <div id="controls-eoq" class="parameter-group active">
+        <div class="group-title">// EOQ Variables</div>
+        <div class="control-slider-wrap">
+          <div class="slider-label-row"><span class="slider-label">Annual Demand (D)</span><span class="slider-value"
+              id="val-eoq-D">4500</span></div>
+          <input type="range" id="slide-eoq-D" min="1000" max="10000" step="100" value="4500" oninput="calculateEOQ()">
+        </div>
+        <div class="control-slider-wrap">
+          <div class="slider-label-row"><span class="slider-label">Order Setup Cost (S)</span><span class="slider-value"
+              id="val-eoq-S">$120</span></div>
+          <input type="range" id="slide-eoq-S" min="20" max="500" step="5" value="120" oninput="calculateEOQ()">
+        </div>
+        <div class="control-slider-wrap">
+          <div class="slider-label-row"><span class="slider-label">Holding Cost / Unit / Yr (H)</span><span
+              class="slider-value" id="val-eoq-H">$6.50</span></div>
+          <input type="range" id="slide-eoq-H" min="1.00" max="25.00" step="0.25" value="6.5" oninput="calculateEOQ()">
+        </div>
+      </div>
+
+      <!-- NEWSVENDOR INPUTS -->
+      <div id="controls-newsvendor" class="parameter-group">
+        <div class="group-title">// Newsvendor Matrix</div>
+        <div class="control-slider-wrap">
+          <div class="slider-label-row"><span class="slider-label">Underage Cost (Cu) - Margin</span><span
+              class="slider-value" id="val-nv-Cu">$45</span></div>
+          <input type="range" id="slide-nv-Cu" min="10" max="150" step="1" value="45" oninput="calculateNewsvendor()">
+        </div>
+        <div class="control-slider-wrap">
+          <div class="slider-label-row"><span class="slider-label">Overage Cost (Co) - Disposal</span><span
+              class="slider-value" id="val-nv-Co">$15</span></div>
+          <input type="range" id="slide-nv-Co" min="5" max="100" step="1" value="15" oninput="calculateNewsvendor()">
+        </div>
+        <div class="control-slider-wrap">
+          <div class="slider-label-row"><span class="slider-label">Mean Expected Demand (&mu;)</span><span
+              class="slider-value" id="val-nv-mean">500</span></div>
+          <input type="range" id="slide-nv-mean" min="100" max="1000" step="10" value="500"
+            oninput="calculateNewsvendor()">
+        </div>
+        <div class="control-slider-wrap">
+          <div class="slider-label-row"><span class="slider-label">Demand Std Dev (&sigma;)</span><span
+              class="slider-value" id="val-nv-sd">90</span></div>
+          <input type="range" id="slide-nv-sd" min="10" max="250" step="5" value="90" oninput="calculateNewsvendor()">
+        </div>
+      </div>
+
+      <!-- BASE STOCK INPUTS -->
+      <div id="controls-basestock" class="parameter-group">
+        <div class="group-title">// Protection Vectors</div>
+        <div class="control-slider-wrap">
+          <div class="slider-label-row"><span class="slider-label">Lead Time Demand Mean</span><span
+              class="slider-value" id="val-bs-mean">350</span></div>
+          <input type="range" id="slide-bs-mean" min="50" max="1000" step="10" value="350"
+            oninput="calculateBaseStock()">
+        </div>
+        <div class="control-slider-wrap">
+          <div class="slider-label-row"><span class="slider-label">Lead Time Demand Std Dev</span><span
+              class="slider-value" id="val-bs-sd">60</span></div>
+          <input type="range" id="slide-bs-sd" min="10" max="200" step="5" value="60" oninput="calculateBaseStock()">
+        </div>
+        <div class="control-slider-wrap">
+          <div class="slider-label-row"><span class="slider-label">Target Service Level (Type I)</span><span
+              class="slider-value" id="val-bs-sl">95.0%</span></div>
+          <input type="range" id="slide-bs-sl" min="75.0" max="99.9" step="0.1" value="95.0"
+            oninput="calculateBaseStock()">
+        </div>
+      </div>
+
+      <!-- BACKORDER INPUTS -->
+      <div id="controls-backorder" class="parameter-group">
+        <div class="group-title">// Shortage Penalty Parameters</div>
+        <div class="control-slider-wrap">
+          <div class="slider-label-row"><span class="slider-label">Annual Demand (D)</span><span class="slider-value"
+              id="val-bo-D">6000</span></div>
+          <input type="range" id="slide-bo-D" min="1000" max="10000" step="100" value="6000"
+            oninput="calculateBackorder()">
+        </div>
+        <div class="control-slider-wrap">
+          <div class="slider-label-row"><span class="slider-label">Order Cost (S)</span><span class="slider-value"
+              id="val-bo-S">$150</span></div>
+          <input type="range" id="slide-bo-S" min="20" max="500" step="5" value="150" oninput="calculateBackorder()">
+        </div>
+        <div class="control-slider-wrap">
+          <div class="slider-label-row"><span class="slider-label">Holding Cost (H)</span><span class="slider-value"
+              id="val-bo-H">$5.00</span></div>
+          <input type="range" id="slide-bo-H" min="1" max="20" step="0.5" value="5" oninput="calculateBackorder()">
+        </div>
+        <div class="control-slider-wrap">
+          <div class="slider-label-row"><span class="slider-label">Backorder Penalty / Unit / Yr (B)</span><span
+              class="slider-value" id="val-bo-B">$12.00</span></div>
+          <input type="range" id="slide-bo-B" min="2" max="100" step="0.5" value="12" oninput="calculateBackorder()">
+        </div>
+      </div>
+    </section>
+
+    <!-- VISUALIZATION CANVAS & READOUTS (RIGHT) -->
+    <section class="visualization-engine">
+
+      <!-- DYNAMIC PERFORMANCE METRICS BOARD -->
+      <div class="kpi-dashboard" id="kpi-board">
+        <!-- Generated via JS state -->
+      </div>
+
+      <!-- RENDER CANVAS CONTAINER -->
+      <div class="canvas-container">
+        <svg id="visualizer-svg" viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg">
+          <!-- SVG content mutated in real-time by model computational logic -->
+        </svg>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- DOCUMENTATION APPENDIX & FRAMEWORK REVIEW -->
+  <section class="appendix-section" id="framework">
+    <h2 class="appendix-title">Stochastic & Deterministic Framework Formulations</h2>
+    <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 24px; max-width: 900px;">
+      Modern supply chain networks deploy distinct inventory allocation logic depending on demand certainty, structural
+      timelines, and systemic risk holding limits. The optimization engine above processes the classical execution
+      frameworks detailed below:
+    </p>
+
+    <table class="matrix-table">
+      <thead>
+        <tr>
+          <th style="width: 22%">Model Type</th>
+          <th style="width: 35%">Operational Optimization Objective</th>
+          <th style="width: 43%">Mathematical Formulation Target</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Economic Order Quantity</strong></td>
+          <td>Balances structural transaction overhead costs against capital holding drag to identify the global minimum
+            total cost point.</td>
+          <td><span class="formula-block">Q* = &radic;(2DS / H)</span></td>
+        </tr>
+        <tr>
+          <td><strong>Stochastic Newsvendor</strong></td>
+          <td>Maximizes expected margin metrics across single-period perishable lifecycles given probabilistic demand
+            variations.</td>
+          <td><span class="formula-block">F(Q*) = Cu / (Cu + Co)</span></td>
+        </tr>
+        <tr>
+          <td><strong>Continuous Base Stock</strong></td>
+          <td>Maintains continuous item availability protections over variable lead-time windows under safety factor
+            scaling targets.</td>
+          <td><span class="formula-block">R = &mu;_LT + (z &times; &sigma;_LT)</span></td>
+        </tr>
+        <tr>
+          <td><strong>Planned Backorders</strong></td>
+          <td>Relaxes rigid zero-stockout assumptions to capture optimization gains where customers accept structured
+            shipment latency.</td>
+          <td><span class="formula-block">Q* = &radic;[ (2DS/H) &times; ((H+B)/B) ]</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RUNTIME DISPATCH FOOTER -->
+  <footer>
+    <div class="footer-copy">&copy; 2026 Miloš Milošević. Built for systems integrity.</div>
+    <div class="footer-links">
+      <a href="https://github.com/milosevicmilos23e" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/miloš-milošević-b44122116" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+
+  <!-- SYSTEM ARCHITECTURE JAVASCRIPT LAYER -->
+  <script>
+    let activeModel = 'eoq';
+
+    function switchModel(modelName) {
+      activeModel = modelName;
+
+      // Toggle active classes on buttons
+      document.querySelectorAll('.model-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      // Toggle input parameter slider blocks
+      document.querySelectorAll('.parameter-group').forEach(group => group.classList.remove('active'));
+      document.getElementById(`controls-${modelName}`).classList.add('active');
+
+      // Run active model math engine loops
+      if (modelName === 'eoq') calculateEOQ();
+      if (modelName === 'newsvendor') calculateNewsvendor();
+      if (modelName === 'basestock') calculateBaseStock();
+      if (modelName === 'backorder') calculateBackorder();
+    }
+
+    // MATHEMATICAL INVERSE NORMAL CDF CONVERGENCE FUNCTIONS (Acklam's Approximation Variant)
+    function normCDF(x) {
+      let t = 1 / (1 + 0.2316419 * Math.abs(x));
+      let d = 0.39894228 * Math.exp(-x * x / 2);
+      let p = d * t * (0.31938153 + t * (-0.356563782 + t * (1.781477937 + t * (-1.821255978 + t * 1.330274429))));
+      return x > 0 ? 1 - p : p;
+    }
+
+    function invNorm(p) {
+      if (p <= 0 || p >= 1) return 0;
+      let low = -6, high = 6, mid = 0;
+      for (let i = 0; i < 40; i++) {
+        mid = (low + high) / 2;
+        if (normCDF(mid) < p) low = mid;
+        else high = mid;
+      }
+      return mid;
+    }
+
+    // --- MODEL ENGINE 01: ECONOMIC ORDER QUANTITY ---
+    function calculateEOQ() {
+      let D = parseFloat(document.getElementById('slide-eoq-D').value);
+      let S = parseFloat(document.getElementById('slide-eoq-S').value);
+      let H = parseFloat(document.getElementById('slide-eoq-H').value);
+
+      document.getElementById('val-eoq-D').textContent = D;
+      document.getElementById('val-eoq-S').textContent = `$${S}`;
+      document.getElementById('val-eoq-H').textContent = `$${H.toFixed(2)}`;
+
+      let Q = Math.sqrt((2 * D * S) / H);
+      let holdingCost = (Q / 2) * H;
+      let setupCost = (D / Q) * S;
+      let totalCost = holdingCost + setupCost;
+
+      // Render KPI components
+      updateKPIs([
+        { label: "Optimal Batch Size (Q*)", value: `${Math.round(Q)} units`, accent: true },
+        { label: "Minimum Annual Cost", value: `$${Math.round(totalCost).toLocaleString()}`, accent: false },
+        { label: "Annual Order Frequency", value: `${(D / Q).toFixed(1)} runs/yr`, accent: false }
+      ]);
+
+      // Replot SVG Sensitivity Curves
+      let svg = document.getElementById('visualizer-svg');
+      svg.innerHTML = `
+      <!-- Grid Lines -->
+      <line x1="50" y1="20" x2="50" y2="300" class="graph-axis" />
+      <line x1="50" y1="300" x2="560" y2="300" class="graph-axis" />
+      <text x="560" y="320" font-family="Roboto Mono" font-size="9" fill="var(--text-muted)" text-anchor="end">Order Quantity (Q)</text>
+      <text x="40" y="25" font-family="Roboto Mono" font-size="9" fill="var(--text-muted)" transform="rotate(-90 40 25)" text-anchor="end">Total Cost Matrix</text>
+    `;
+
+      let holdingPoints = "";
+      let setupPoints = "";
+      let totalPoints = "";
+
+      // Scale curve paths relative to active slider limits
+      let xMax = Q * 2.2;
+      let yMax = totalCost * 1.8;
+
+      for (let xPos = 20; xPos <= 540; xPos += 10) {
+        let qVal = (xPos - 50) * (xMax / 490);
+        if (qVal <= 0) continue;
+
+        let hC = (qVal / 2) * H;
+        let sC = (D / qVal) * S;
+        let tC = hC + sC;
+
+        let cx = xPos;
+        let cyH = 300 - (hC / yMax) * 270;
+        let cyS = 300 - (sC / yMax) * 270;
+        let cyT = 300 - (tC / yMax) * 270;
+
+        if (cyH >= 20 && cyH <= 300) holdingPoints += `${cx},${cyH} `;
+        if (cyS >= 20 && cyS <= 300) setupPoints += `${cx},${cyS} `;
+        if (cyT >= 20 && cyT <= 300) totalPoints += `${cx},${cyT} `;
+      }
+
+      svg.innerHTML += `
+      <polyline points="${holdingPoints}" class="line-holding-cost" />
+      <polyline points="${setupPoints}" class="line-setup-cost" />
+      <polyline points="${totalPoints}" class="line-total-cost" />
+      <circle cx="${50 + (Q / xMax) * 490}" cy="${300 - (totalCost / yMax) * 270}" r="5" class="optimal-marker" />
+      <line x1="${50 + (Q / xMax) * 490}" y1="20" x2="${50 + (Q / xMax) * 490}" y2="300" class="reference-line" />
+      <text x="${60 + (Q / xMax) * 490}" y="40" font-family="Ubuntu" font-size="11" fill="var(--accent)" font-weight="700">Global Minimum Cost Equilibrium</text>
+    `;
+    }
+
+    // --- MODEL ENGINE 02: STOCHASTIC NEWSVENDOR ---
+    function calculateNewsvendor() {
+      let Cu = parseFloat(document.getElementById('slide-nv-Cu').value);
+      let Co = parseFloat(document.getElementById('slide-nv-Co').value);
+      let mean = parseFloat(document.getElementById('slide-nv-mean').value);
+      let sd = parseFloat(document.getElementById('slide-nv-sd').value);
+
+      document.getElementById('val-nv-Cu').textContent = `$${Cu}`;
+      document.getElementById('val-nv-Co').textContent = `$${Co}`;
+      document.getElementById('val-nv-mean').textContent = mean;
+      document.getElementById('val-nv-sd').textContent = sd;
+
+      let criticalRatio = Cu / (Cu + Co);
+      let z = invNorm(criticalRatio);
+      let Q = mean + z * sd;
+
+      updateKPIs([
+        { label: "Critical Ratio (CR)", value: `${(criticalRatio * 100).toFixed(1)}%`, accent: false },
+        { label: "Optimal Order Q*", value: `${Math.round(Q)} units`, accent: true },
+        { label: "Safety Buffers Threshold", value: `${z >= 0 ? '+' : ''}${z.toFixed(2)} &sigma;`, accent: false }
+      ]);
+
+      let svg = document.getElementById('visualizer-svg');
+      svg.innerHTML = `
+      <line x1="50" y1="300" x2="560" y2="300" class="graph-axis" />
+      <text x="560" y="320" font-family="Roboto Mono" font-size="9" fill="var(--text-muted)" text-anchor="end">Demand Distribution Horizon</text>
+    `;
+
+      // Render Gaussian Curve Normal Mapping Array
+      let points = "";
+      let fillPoints = `50,300 `;
+      let cutoffX = 50;
+
+      for (let x = 50; x <= 550; x++) {
+        let demandVal = mean - 3 * sd + ((x - 50) / 500) * (6 * sd);
+        let exponent = -parseFloat(Math.pow(demandVal - mean, 2)) / (2 * Math.pow(sd, 2));
+        let yVal = (1 / (sd * Math.sqrt(2 * Math.PI))) * Math.exp(exponent);
+
+        let svgY = 300 - yVal * sd * 450; // Dynamic scale adjustment multiplier
+        points += `${x},${svgY} `;
+
+        if (demandVal <= Q) {
+          fillPoints += `${x},${svgY} `;
+          cutoffX = x;
+        }
+      }
+      fillPoints += `${cutoffX},300`;
+
+      svg.innerHTML += `
+      <polygon points="${fillPoints}" class="distribution-fill" />
+      <polyline points="${points}" class="distribution-line" />
+      <line x1="${cutoffX}" y1="30" x2="${cutoffX}" y2="300" class="critical-cutoff" />
+      <circle cx="${cutoffX}" cy="${300 - (1 / (sd * Math.sqrt(2 * Math.PI))) * Math.exp(-parseFloat(Math.pow(Q - mean, 2)) / (2 * Math.pow(sd, 2))) * sd * 450}" r="4" fill="var(--accent)" />
+      <text x="${cutoffX + 10}" y="40" font-family="Roboto Mono" font-size="10" fill="var(--accent)">Q* Target Target Allocation</text>
+    `;
+    }
+
+    // --- MODEL ENGINE 03: CONTINUOUS BASE STOCK ---
+    function calculateBaseStock() {
+      let mean = parseFloat(document.getElementById('slide-bs-mean').value);
+      let sd = parseFloat(document.getElementById('slide-bs-sd').value);
+      let sl = parseFloat(document.getElementById('slide-bs-sl').value) / 100;
+
+      document.getElementById('val-bs-mean').textContent = mean;
+      document.getElementById('val-bs-sd').textContent = sd;
+      document.getElementById('val-bs-sl').textContent = `${(sl * 100).toFixed(1)}%`;
+
+      let z = invNorm(sl);
+      let ss = z * sd;
+      let R = mean + ss;
+
+      updateKPIs([
+        { label: "Safety Stock Protection", value: `${Math.round(ss)} units`, accent: false },
+        { label: "Optimal Base Stock (R)", value: `${Math.round(R)} units`, accent: true },
+        { label: "Service Risk Coefficient", value: `Z = ${z.toFixed(2)}`, accent: false }
+      ]);
+
+      let svg = document.getElementById('visualizer-svg');
+      // Generate a stochastic inventory trace behavior graph
+      svg.innerHTML = `
+      <line x1="50" y1="20" x2="50" y2="300" class="graph-axis" />
+      <line x1="50" y1="300" x2="560" y2="300" class="graph-axis" />
+      <line x1="50" y1="${300 - (R / 1300) * 260}" x2="560" y2="${300 - (R / 1300) * 260}" class="line-total-cost" style="stroke-dasharray:6,4;" />
+      <line x1="50" y1="${300 - (ss / 1300) * 260}" x2="560" y2="${300 - (ss / 1300) * 260}" class="reference-line" />
+      <text x="55" y="${290 - (R / 1300) * 260}" font-family="Roboto Mono" font-size="10" fill="var(--brand)">Base Stock Order Level (R)</text>
+      <text x="55" y="${290 - (ss / 1300) * 260}" font-family="Roboto Mono" font-size="9" fill="var(--text-muted)">Safety Stock Margin (SS)</text>
+    `;
+
+      let trace = "50,80 ";
+      let currentInv = R;
+      // Set fixed seed-like paths to represent continuous step-down depletion cycles
+      let intervals = [10, 20, 45, 12, 5, 40, 25, 60, 15, 35, 10, 55, 20, 42, 10];
+      let stepX = 50;
+
+      for (let i = 0; i < intervals.length; i++) {
+        stepX += 34;
+        currentInv -= intervals[i] * (mean / 300);
+        let y1 = 300 - (currentInv / 1300) * 260;
+        trace += `${stepX},${y1} `;
+
+        // Simulate Replenishment Event Trigger
+        if (currentInv < ss + 100 || i % 4 === 0) {
+          currentInv = R - 40;
+          let y2 = 300 - (currentInv / 1300) * 260;
+          trace += `${stepX},${y2} `;
+        }
+      }
+      svg.innerHTML += `<polyline points="${trace}" class="sawtooth-line" style="stroke: var(--accent);" />`;
+    }
+
+    // --- MODEL ENGINE 04: PLANNED BACKORDER MODEL ---
+    function calculateBackorder() {
+      let D = parseFloat(document.getElementById('slide-bo-D').value);
+      let S = parseFloat(document.getElementById('slide-bo-S').value);
+      let H = parseFloat(document.getElementById('slide-bo-H').value);
+      let B = parseFloat(document.getElementById('slide-bo-B').value);
+
+      document.getElementById('val-bo-D').textContent = D;
+      document.getElementById('val-bo-S').textContent = `$${S}`;
+      document.getElementById('val-bo-H').textContent = `$${H.toFixed(2)}`;
+      document.getElementById('val-bo-B').textContent = `$${B.toFixed(2)}`;
+
+      let Q = Math.sqrt(((2 * D * S) / H) * ((H + B) / B));
+      let maxBackorder = Q * (H / (H + B));
+      let maxInventory = Q - maxBackorder;
+
+      updateKPIs([
+        { label: "Optimal Order Q*", value: `${Math.round(Q)} units`, accent: true },
+        { label: "Maximum Backorder (S*)", value: `${Math.round(maxBackorder)} units`, accent: false },
+        { label: "Net Active Holding Ceiling", value: `${Math.round(maxInventory)} units`, accent: false }
+      ]);
+
+      let svg = document.getElementById('visualizer-svg');
+      let zeroLineY = 200;
+      let scale = 110 / Q;
+
+      svg.innerHTML = `
+      <line x1="50" y1="20" x2="50" y2="310" class="graph-axis" />
+      <line x1="50" y1="${zeroLineY}" x2="560" y2="${zeroLineY}" class="graph-axis" style="stroke-width:1.5; opacity:0.6;" />
+      <text x="55" y="${zeroLineY - 6}" font-family="Roboto Mono" font-size="8" fill="var(--text-muted)">Zero Stock Equilibrium Axis</text>
+    `;
+
+      // Draw Classical Sawtooth wave dipping cleanly under zero line boundary profiles
+      let wavePoints = `50,${zeroLineY - maxInventory * scale} `;
+      let currentX = 50;
+
+      for (let cycle = 0; cycle < 3; cycle++) {
+        currentX += 100;
+        let bottomY = zeroLineY + maxBackorder * scale;
+        wavePoints += `${currentX},${bottomY} `;
+
+        let topY = zeroLineY - maxInventory * scale;
+        wavePoints += `${currentX},${topY} `;
+
+        currentX += 50;
+        wavePoints += `${currentX},${topY} `;
+      }
+
+      svg.innerHTML += `
+      <polyline points="${wavePoints}" class="sawtooth-line" />
+      <line x1="50" y1="${zeroLineY + maxBackorder * scale}" x2="560" y2="${zeroLineY + maxBackorder * scale}" class="reference-line" style="stroke: var(--alert);" />
+      <text x="320" y="${zeroLineY + maxBackorder * scale + 14}" font-family="Roboto Mono" font-size="9" fill="var(--alert)">Planned Backorder Boundary Deficit Zone</text>
+    `;
+    }
+
+    // --- RENDERING DRIVER PANEL HELPERS ---
+    function updateKPIs(cards) {
+      let board = document.getElementById('kpi-board');
+      board.innerHTML = '';
+      cards.forEach(card => {
+        board.innerHTML += `
+        <div class="kpi-tile ${card.accent ? 'accent-tile' : ''}">
+          <div class="kpi-tile-label">${card.label}</div>
+          <div class="kpi-tile-value">${card.value}</div>
+        </div>
+      `;
+      });
+    }
+
+    // Engage default initialization calculation thread metrics
+    window.addEventListener("load", () => {
+      calculateEOQ();
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miloš Milošević - Operations Analytics & Optimization</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&family=Roboto+Mono:wght@300;400;500&family=Roboto:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/nav.css">
+
+  <link rel="stylesheet" href="./css/multi-warehouse-solver.css">
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="./index.html" class="nav-logo-link">
+      <img src="./assets/logo23.png" alt="Logo" class="nav-logo-img">
+    </a>
+    <ul class="nav-links">
+      <li class="dropdown">
+        <a href="./index.html#projects">Projects <span class="dropdown-caret">▼</span></a>
+        <ul class="dropdown-menu">
+          <li><a href="./demand-profiler.html"><span class="menu-title">SC Demand Profiler</span><span
+                class="menu-desc">Ingestion &amp; Profiling Suite</span></a></li>
+          <li><a href="./production-scheduler.html"><span class="menu-title">Production Scheduler</span><span
+                class="menu-desc">Constraint Optimization</span></a></li>
+          <li><a href="./multi-warehouse-solver.html"><span class="menu-title">Transport Optimizer</span><span
+                class="menu-desc">Network Routing</span></a></li>
+          <li><a href="./inventory-control.html"><span class="menu-title">Inventory Framework</span><span
+                class="menu-desc">EOQ Simulations</span></a></li>
+        </ul>
+      </li>
+      <li><a href="./index.html#experience">Experience</a></li>
+      <li><a href="./index.html#stack">Stack</a></li>
+      <li><a href="./index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-status">
+      <div class="status-dot"></div>Multi-Hub Logic Active
+    </div>
+  </nav>
+
+  <!-- HERO AREA -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Network Optimization</div>
+      <h1 class="hero-name">Multi-Warehouse<br>Transport Optimizer</h1>
+      <div class="hero-title">Multi-Commodity SMOG-to-Shortage Routing Solver</div>
+
+      <p class="hero-desc">
+        A structural network solver built to eliminate cross-warehouse inventory imbalances. By mapping SMOG dead stock
+        locations against concurrent stockout nodes, it constructs a consolidated milk-run dispatch that resolves both
+        problems simultaneously - freeing locked capital while closing supply gaps.
+      </p>
+
+      <div class="code-callout">
+        <span class="code-callout-header">// Routing Constraint Architecture:</span>
+        <p>
+          • <strong>SMOG Detection:</strong> Scans all hubs for excess slow-moving stock flagged against turnover
+          thresholds.<br>
+          • <strong>Stockout Matching:</strong> Cross-references shortage nodes to identify viable transfer
+          candidates.<br>
+          • <strong>Milk-Run Dispatch:</strong> Consolidates multi-SKU movements into a single optimized route sweep
+          using OR-Tools linear programming.
+        </p>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="scenario-header">
+        <div class="scenario-label">// Network telemetry - 4-Node Multi-SKU Solver</div>
+        <div class="scenario-sku-badge" id="sku-badge">MATRIX-INIT</div>
+      </div>
+
+      <!-- ADVANCED MULTI-WAREHOUSE MATRIX SVG -->
+      <div class="scenario-svg-wrap">
+        <svg id="solver-svg" viewBox="0 0 540 400" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;">
+          <defs>
+            <filter id="glow-brand" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <filter id="glow-accent" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          <!-- NETWORK PATH CONNECTIONS -->
+          <path id="path-wh1" d="M 270,65 L 270,200" class="route-path" />
+          <path id="path-wh2" d="M 435,200 L 270,200" class="route-path" />
+          <path id="path-wh3" d="M 270,335 L 270,200" class="route-path" />
+          <path id="path-wh4" d="M 105,200 L 270,200" class="route-path" />
+
+          <!-- CORE ENGINE MATRIX INTERFACE -->
+          <g id="node-core" transform="translate(270,200)">
+            <circle r="34" fill="#121815" stroke="rgba(136,167,142,0.25)" stroke-width="1.5" />
+            <circle id="core-pulse" r="26" fill="none" stroke="var(--brand-dim)" stroke-width="1"
+              stroke-dasharray="2 4" />
+            <text text-anchor="middle" y="4" font-family="'Roboto Mono',monospace" font-size="8"
+              fill="var(--text-secondary)" font-weight="500">OPTIMIZER</text>
+          </g>
+
+          <!-- WH-1: NORTH (SOURCE NODE) -->
+          <g id="node-wh1" transform="translate(270,65)">
+            <rect id="box-wh1" x="-50" y="-30" width="100" height="60" rx="3" class="node-box" fill="#1a211d"
+              stroke="var(--border)" stroke-width="1" />
+            <text y="-14" text-anchor="middle" font-family="'Ubuntu',sans-serif" font-size="10" font-weight="700"
+              fill="var(--text-primary)">WH-1 (North Cluster)</text>
+            <g transform="translate(-42, 3)" font-family="'Roboto Mono',monospace" font-size="7"
+              fill="var(--text-muted)">
+              <text id="wh1-m1">SKU_A: CRITICAL SMOG</text>
+              <text id="wh1-m2" y="10">SKU_B: NOMINAL</text>
+            </g>
+            <text id="wh1-status" y="42" text-anchor="middle" font-family="'Roboto Mono',monospace" font-size="8"
+              fill="var(--text-muted)">IDLE</text>
+            <circle id="ring-wh1" cx="0" cy="0" r="0" fill="none" stroke="var(--brand)" opacity="0" />
+          </g>
+
+          <!-- WH-2: EAST (TARGET RECIPIPIENT) -->
+          <g id="node-wh2" transform="translate(435,200)">
+            <rect id="box-wh2" x="-50" y="-30" width="100" height="60" rx="3" class="node-box" fill="#1a211d"
+              stroke="var(--border)" stroke-width="1" />
+            <text y="-14" text-anchor="middle" font-family="'Ubuntu',sans-serif" font-size="10" font-weight="700"
+              fill="var(--text-primary)">WH-2 (East Coast)</text>
+            <g transform="translate(-42, 3)" font-family="'Roboto Mono',monospace" font-size="7"
+              fill="var(--text-muted)">
+              <text id="wh2-m1">SKU_A: STK-OUT [!]</text>
+              <text id="wh2-m2" y="10">SKU_C: NOMINAL</text>
+            </g>
+            <text id="wh2-status" y="42" text-anchor="middle" font-family="'Roboto Mono',monospace" font-size="8"
+              fill="var(--text-muted)">IDLE</text>
+            <circle id="ring-wh2" cx="0" cy="0" r="0" fill="none" stroke="var(--brand)" opacity="0" />
+          </g>
+
+          <!-- WH-3: SOUTH (SECONDARY SOURCE) -->
+          <g id="node-wh3" transform="translate(270,335)">
+            <rect id="box-wh3" x="-50" y="-30" width="100" height="60" rx="3" class="node-box" fill="#1a211d"
+              stroke="var(--border)" stroke-width="1" />
+            <text y="-14" text-anchor="middle" font-family="'Ubuntu',sans-serif" font-size="10" font-weight="700"
+              fill="var(--text-primary)">WH-3 (South Hub)</text>
+            <g transform="translate(-42, 3)" font-family="'Roboto Mono',monospace" font-size="7"
+              fill="var(--text-muted)">
+              <text id="wh3-m1">SKU_B: EXCESS SMOG</text>
+              <text id="wh3-m2" y="10">SKU_C: NOMINAL</text>
+            </g>
+            <text id="wh3-status" y="42" text-anchor="middle" font-family="'Roboto Mono',monospace" font-size="8"
+              fill="var(--text-muted)">IDLE</text>
+            <circle id="ring-wh3" cx="0" cy="0" r="0" fill="none" stroke="var(--brand)" opacity="0" />
+          </g>
+
+          <!-- WH-4: WEST (SECONDARY RECIPIENT) -->
+          <g id="node-wh4" transform="translate(105,200)">
+            <rect id="box-wh4" x="-50" y="-30" width="100" height="60" rx="3" class="node-box" fill="#1a211d"
+              stroke="var(--border)" stroke-width="1" />
+            <text y="-14" text-anchor="middle" font-family="'Ubuntu',sans-serif" font-size="10" font-weight="700"
+              fill="var(--text-primary)">WH-4 (West Hub)</text>
+            <g transform="translate(-42, 3)" font-family="'Roboto Mono',monospace" font-size="7"
+              fill="var(--text-muted)">
+              <text id="wh4-m1">SKU_A: NOMINAL</text>
+              <text id="wh4-m2" y="10">SKU_B: STK-OUT [!]</text>
+            </g>
+            <text id="wh4-status" y="42" text-anchor="middle" font-family="'Roboto Mono',monospace" font-size="8"
+              fill="var(--text-muted)">IDLE</text>
+            <circle id="ring-wh4" cx="0" cy="0" r="0" fill="none" stroke="var(--brand)" opacity="0" />
+          </g>
+
+          <!-- MULTI-COMMODITY PACKET STREAMERS -->
+          <circle id="pack-a" r="5" fill="var(--accent)" class="packet-dot" filter="url(#glow-accent)" opacity="0"
+            cx="270" cy="65" />
+          <circle id="pack-b" r="5" fill="var(--brand)" class="packet-dot" filter="url(#glow-brand)" opacity="0"
+            cx="270" cy="335" />
+        </svg>
+      </div>
+
+      <!-- LOG TERMINAL DISPLAY -->
+      <div class="scenario-log" id="scenario-log">
+        <div class="log-line" id="log-l1">// Orchestrator initializing structural 4-node matrix map...</div>
+        <div class="log-line" id="log-l2"></div>
+        <div class="log-line" id="log-l3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KPI DATA STRIP -->
+  <div class="kpi-section">
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-label">Topology Scope</div>
+        <div class="kpi-value">N-Node Multi-Commodity</div>
+        <div class="kpi-sub">Simultaneous Matrix Solving</div>
+        <div class="kpi-badge">Cross-connected dependencies</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Allocation Strategy</div>
+        <div class="kpi-value">Consolidated Milk-Run Logic</div>
+        <div class="kpi-sub">Sweeps SMOG directly to Shortages</div>
+        <div class="kpi-badge">Minimizes Unloaded Mile Friction</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Financial Target</div>
+        <div class="kpi-value">€84,500 System Liquidity</div>
+        <div class="kpi-sub">Capital Unlock Execution</div>
+        <div class="kpi-badge">Zeroed Dead-stock overhead</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARCHITECTURE FLOW -->
+  <section id="projects" class="section-header">
+    <div class="section-eyebrow">Engine Blueprint</div>
+    <h2 class="section-title">The Multi-Warehouse Allocation Sequence</h2>
+  </section>
+
+  <div class="pipeline-section">
+    <div class="pipeline-nodes">
+      <div class="pipeline-node">
+        <div class="node-step"><span class="node-step-num">01</span> / Network Scan</div>
+        <h3 class="node-title">Imbalance Evaluation</h3>
+        <div class="node-subtitle">Cross-Node Inventory Telemetry</div>
+        <p class="node-desc">Gathers inventory datasets across all regional hubs to catch contrasting SMOG and STK-OUT
+          signatures.</p>
+        <div class="node-tags"><span class="tag">PostgreSQL</span><span class="tag">FastAPI</span></div>
+      </div>
+      <div class="pipeline-node">
+        <div class="node-step"><span class="node-step-num">02</span> / Matrix Compute</div>
+        <h3 class="node-title">Linear Network Routing</h3>
+        <div class="node-subtitle">Multi-Commodity Graph Assembly</div>
+        <p class="node-desc">Applies discrete optimization equations to build a consolidated movement map, eliminating
+          double-handling cost.</p>
+        <div class="node-tags"><span class="tag">Google OR-Tools</span><span class="tag">Graph Theory</span></div>
+      </div>
+      <div class="pipeline-node">
+        <div class="node-step"><span class="node-step-num">03</span> / Milk-Run Dispatch</div>
+        <h3 class="node-title">Consolidated Collection</h3>
+        <div class="node-subtitle">Simultaneous Inter-Hub Transfer</div>
+        <p class="node-desc">Triggers synchronized multi-item cargo runs, collecting dead volumes and feeding deficient
+          destinations concurrently.</p>
+        <div class="node-tags"><span class="tag">Operations Dispatch</span><span class="tag">ETL Logic</span></div>
+      </div>
+      <div class="pipeline-node">
+        <div class="node-step"><span class="node-step-num">04</span> / Capital Unlock</div>
+        <h3 class="node-title">Settle & Rebalance</h3>
+        <div class="node-subtitle">Operational Ledger Clean-Up</div>
+        <p class="node-desc">Refreshes core business matrices to record filled back-orders and minimized holding
+          liabilities.</p>
+        <div class="node-tags"><span class="tag">Power BI Layers</span><span class="tag">DAX Analytics</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECHNICAL CAPABILITY -->
+  <section id="stack" class="stack-section">
+    <div class="section-eyebrow">Tooling</div>
+    <h2 class="section-title">Technical Capability Matrix</h2>
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="stack-card-title">Analytics & Computation</div>
+        <div class="stack-items">
+          <span class="stack-item highlight">Python (FastAPI)</span>
+          <span class="stack-item">Pandas / NumPy</span>
+          <span class="stack-item highlight">Google OR-Tools</span>
+          <span class="stack-item">SQL (PostgreSQL)</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-title">Business Intelligence</div>
+        <div class="stack-items">
+          <span class="stack-item highlight">Advanced Power BI</span>
+          <span class="stack-item">Relational DAX Models</span>
+          <span class="stack-item">M / Power Query</span>
+          <span class="stack-item">Advanced Excel Engines</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-title">Infrastructure & Embedded</div>
+        <div class="stack-items">
+          <span class="stack-item">Docker Containers</span>
+          <span class="stack-item">Git Workflow</span>
+          <span class="stack-item highlight">Microprocessor Technology</span>
+          <span class="stack-item">ESP32 Automation Systems</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERFACE/CONTACT -->
+  <section id="contact" class="contact-section">
+    <div class="contact-inner">
+      <div class="section-eyebrow">Interface</div>
+      <h2 class="section-title" style="margin-bottom: 20px;">Initiate Network Modeling</h2>
+      <p class="contact-desc">
+        Ready to transform segmented localized dashboards into automated, grid-wide structural allocation architectures?
+        Let's connect.
+      </p>
+      <div class="hero-cta">
+        <a href="mailto:milos.milosevic.eng@gmail.com" class="btn-primary">Connect via Email</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-copy">&copy; 2026 Miloš Milošević. Built for systems integrity.</div>
+    <div class="footer-links">
+      <a href="https://github.com/milosevicmilos23e" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/miloš-milošević-b44122116" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+
+  <!-- SIMULATION ENGINE CODE -->
+  <script>
+    // --- MULTI-WAREHOUSE MATRIX PIPELINE ANIMATION ---
+    const badge = document.getElementById("sku-badge");
+    const corePulse = document.getElementById("core-pulse");
+
+    // Node components
+    const box1 = document.getElementById("box-wh1"), box2 = document.getElementById("box-wh2");
+    const box3 = document.getElementById("box-wh3"), box4 = document.getElementById("box-wh4");
+
+    const m1a = document.getElementById("wh1-m1"), m1b = document.getElementById("wh1-m2");
+    const m2a = document.getElementById("wh2-m1"), m2b = document.getElementById("wh2-m2");
+    const m3a = document.getElementById("wh3-m1"), m3b = document.getElementById("wh3-m2");
+    const m4a = document.getElementById("wh4-m1"), m4b = document.getElementById("wh4-m2");
+
+    const s1 = document.getElementById("wh1-status"), s2 = document.getElementById("wh2-status");
+    const s3 = document.getElementById("wh3-status"), s4 = document.getElementById("wh4-status");
+
+    const r1 = document.getElementById("ring-wh1"), r2 = document.getElementById("ring-wh2");
+    const r3 = document.getElementById("ring-wh3"), r4 = document.getElementById("ring-wh4");
+
+    const pA = document.getElementById("pack-a"), pB = document.getElementById("pack-b");
+
+    const pathW1 = document.getElementById("path-wh1"), pathW2 = document.getElementById("path-wh2");
+    const pathW3 = document.getElementById("path-wh3"), pathW4 = document.getElementById("path-wh4");
+
+    const log1 = document.getElementById("log-l1"), log2 = document.getElementById("log-l2"), log3 = document.getElementById("log-l3");
+
+    let loopPhase = 0;
+
+    function advanceMatrixLoop() {
+      switch (loopPhase) {
+        case 0: // Phase 1: Global Anomaly Capture
+          badge.textContent = "GRID-ANOMALY-DETECTED";
+          badge.style.color = "var(--alert)";
+          badge.style.backgroundColor = "var(--alert-dim)";
+          badge.style.borderColor = "rgba(224,122,95,0.3)";
+
+          // Set SMOG / Stockout visual signatures
+          box1.className.baseVal = "node-box smog-state";
+          m1a.textContent = "SKU_A: CRITICAL SMOG"; m1a.setAttribute("fill", "var(--accent)");
+          s1.textContent = "EXCESS HOLDING"; s1.setAttribute("fill", "var(--accent)");
+
+          box2.className.baseVal = "node-box stockout-state";
+          m2a.textContent = "SKU_A: STK-OUT [!]"; m2a.setAttribute("fill", "var(--alert)");
+          s2.textContent = "SHORTAGE CRITICAL"; s2.setAttribute("fill", "var(--alert)");
+
+          box3.className.baseVal = "node-box smog-state";
+          m3a.textContent = "SKU_B: EXCESS SMOG"; m3a.setAttribute("fill", "var(--accent)");
+          s3.textContent = "STAGNANT STOCK"; s3.setAttribute("fill", "var(--accent)");
+
+          box4.className.baseVal = "node-box stockout-state";
+          m4b.textContent = "SKU_B: STK-OUT [!]"; m4b.setAttribute("fill", "var(--alert)");
+          s4.textContent = "SHORTAGE CRITICAL"; s4.setAttribute("fill", "var(--alert)");
+
+          log1.textContent = "[SYSTEM-SCAN] Contrasting inventory profiles located across 4 hubs.";
+          log1.className = "log-line log-alert";
+          log2.textContent = ">> WH - 1 & WH - 3 locking capital via dead stock.WH - 2 & WH - 4 reporting major structural shortfalls.";
+          log2.className = "log-line";
+          log3.textContent = "";
+
+          loopPhase = 1;
+          setTimeout(advanceMatrixLoop, 4000);
+          break;
+
+        case 1: // Phase 2: Core Matrix Balancing
+          badge.textContent = "COMPUTING-MILK-RUN";
+          badge.style.color = "var(--accent)";
+          badge.style.backgroundColor = "var(--accent-dim)";
+          badge.style.borderColor = "rgba(247,227,121,0.3)";
+
+          corePulse.style.animation = "ripple 0.8s ease-out infinite";
+          corePulse.style.stroke = "var(--brand)";
+
+          // Turn on routing vector tracks
+          pathW1.className.baseVal = "route-path active";
+          pathW2.className.baseVal = "route-path active";
+          pathW3.className.baseVal = "route-path active";
+          pathW4.className.baseVal = "route-path active";
+
+          log1.textContent = "[OPTIMIZER-MATRIX] Executing linear routing constraint math loops...";
+          log1.className = "log-line log-warn";
+          log2.textContent = ">> Assembling unified multi - point collection and distribution sweep.";
+
+          loopPhase = 2;
+          setTimeout(advanceMatrixLoop, 2500);
+          break;
+
+        case 2: // Phase 3: Consolidated Redistribution Transit
+          badge.textContent = "CONSOLIDATED-SWEEP";
+          badge.style.color = "#cbd5e1";
+
+          log1.textContent = "[BALANCING-DISPATCH] Active items routing through optimal channels.";
+          log1.className = "log-line log-warn";
+          log2.textContent = ">> Inbound Collection: Gathering SKU_A from WH - 1 & SKU_B from WH - 3.";
+
+          pA.style.opacity = "1";
+          pB.style.opacity = "1";
+
+          let runProgress = 0;
+          let vectorClock = setInterval(() => {
+            runProgress += 0.02;
+            if (runProgress >= 1) {
+              clearInterval(vectorClock);
+              pA.style.opacity = "0";
+              pB.style.opacity = "0";
+              loopPhase = 3;
+              advanceMatrixLoop();
+            } else {
+              // JavaScript controlled Hub-and-Spoke route traversal
+              if (runProgress < 0.5) {
+                // Stage A: Source nodes flow into central optimizer core
+                let factor = runProgress * 2;
+                // Packet A: WH-1 (270, 65) -> Core (270, 200)
+                pA.setAttribute("cx", 270);
+                pA.setAttribute("cy", 65 + (200 - 65) * factor);
+
+                // Packet B: WH-3 (270, 335) -> Core (270, 200)
+                pB.setAttribute("cx", 270);
+                pB.setAttribute("cy", 335 + (200 - 335) * factor);
+              } else {
+                // Stage B: Sorted assets redistribute from core out to stockout hubs
+                let factor = (runProgress - 0.5) * 2;
+                if (runProgress === 0.52) {
+                  log2.textContent = ">> Outbound Delivery: Feeding SKU_A to WH - 2 & SKU_B to WH - 4.";
+                }
+                // Packet A (SKU_A): Core (270, 200) -> WH-2 (435, 200)
+                pA.setAttribute("cx", 270 + (435 - 270) * factor);
+                pA.setAttribute("cy", 200);
+
+                // Packet B (SKU_B): Core (270, 200) -> WH-4 (105, 200)
+                pB.setAttribute("cx", 270 + (105 - 270) * factor);
+                pB.setAttribute("cy", 200);
+              }
+            }
+          }, 35);
+          break;
+
+        case 3: // Phase 4: Network Settle & Value Realization
+          badge.textContent = "OPTIMAL-STEADY-STATE";
+          badge.style.color = "var(--brand)";
+          badge.style.backgroundColor = "rgba(136,167,142,0.1)";
+          badge.style.borderColor = "var(--border)";
+
+          corePulse.style.animation = "none";
+
+          // Deactivate tracks
+          pathW1.className.baseVal = "route-path";
+          pathW2.className.baseVal = "route-path";
+          pathW3.className.baseVal = "route-path";
+          pathW4.className.baseVal = "route-path";
+
+          // Set stable state styles across grid cards
+          box1.className.baseVal = "node-box resolved";
+          box2.className.baseVal = "node-box resolved";
+          box3.className.baseVal = "node-box resolved";
+          box4.className.baseVal = "node-box resolved";
+
+          m1a.textContent = "SKU_A: REBALANCED"; m1a.setAttribute("fill", "var(--brand)");
+          m2a.textContent = "SKU_A: FULFILLED"; m2a.setAttribute("fill", "var(--brand)");
+          m3a.textContent = "SKU_B: REBALANCED"; m3a.setAttribute("fill", "var(--brand)");
+          m4b.textContent = "SKU_B: FULFILLED"; m4b.setAttribute("fill", "var(--brand)");
+
+          s1.textContent = "NOMINAL YIELD"; s1.setAttribute("fill", "var(--brand)");
+          s2.textContent = "DEMAND BALANCED"; s2.setAttribute("fill", "var(--brand)");
+          s3.textContent = "NOMINAL YIELD"; s3.setAttribute("fill", "var(--brand)");
+          s4.textContent = "DEMAND BALANCED"; s4.setAttribute("fill", "var(--brand)");
+
+          // Fire structural ring flashes
+          r1.className.baseVal = "liquidity-ring"; r1.style.opacity = "1";
+          r2.className.baseVal = "liquidity-ring"; r2.style.opacity = "1";
+          r3.className.baseVal = "liquidity-ring"; r3.style.opacity = "1";
+          r4.className.baseVal = "liquidity-ring"; r4.style.opacity = "1";
+
+          log1.textContent = "[STEADY-STATE] Matrix balanced. Grid-wide variances zeroed out.";
+          log1.className = "log-line log-ok";
+          log2.textContent = ">> Inter-facility network friction dropped by 34%. Dead stock reallocated.";
+          log3.textContent = ">> Financial Yield Ledger: +€84,500 active working capital unlocked.";
+          log3.className = "log-line log-ok";
+
+          loopPhase = 0;
+          setTimeout(() => {
+            r1.className.baseVal = ""; r1.style.opacity = "0";
+            r2.className.baseVal = ""; r2.style.opacity = "0";
+            r3.className.baseVal = ""; r3.style.opacity = "0";
+            r4.className.baseVal = ""; r4.style.opacity = "0";
+            advanceMatrixLoop();
+          }, 6000);
+          break;
+      }
+    }
+
+    // Trigger grid loops on display load
+    setTimeout(advanceMatrixLoop, 800);
+  </script>
+</body>
+
+</html>

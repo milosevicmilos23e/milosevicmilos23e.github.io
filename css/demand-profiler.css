@@ -1,0 +1,201 @@
+/* =============================================================
+   DEMAND-PROFILER.CSS - Demand Profiler Specific Styles
+   ============================================================= */
+
+/* --- SCENARIO HEADER & CONSOLE --- */
+.scenario-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.scenario-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.scenario-sku-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--brand);
+  background: var(--brand-glow);
+  border: 1px solid var(--border);
+  padding: 2px 10px;
+  border-radius: 2px;
+  letter-spacing: 0.08em;
+}
+
+.scenario-svg-wrap {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: rgba(18, 24, 21, 0.4);
+  border: 1px solid var(--border-silver);
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.scenario-svg-wrap svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.scenario-log {
+  background: var(--bg-raised);
+  border: 1px solid var(--border-silver);
+  border-radius: 3px;
+  padding: 12px 14px;
+  min-height: 94px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.log-line {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+.log-line.highlight-brand {
+  color: var(--brand);
+}
+
+.log-line.highlight-accent {
+  color: var(--accent);
+}
+
+.log-line.highlight-alert {
+  color: var(--alert);
+}
+
+/* --- SVG Specific Styles --- */
+.matrix-cell {
+  fill: #151c18;
+  stroke: rgba(136, 167, 142, 0.12);
+  stroke-width: 1;
+  transition: fill 0.3s, stroke 0.3s;
+}
+
+.matrix-cell.active-cell {
+  fill: rgba(136, 167, 142, 0.06);
+  stroke: rgba(136, 167, 142, 0.4);
+}
+
+.matrix-cell.active-cell-erratic {
+  fill: rgba(247, 227, 121, 0.03);
+  stroke: rgba(247, 227, 121, 0.3);
+}
+
+.matrix-cell.active-cell-lumpy {
+  fill: rgba(224, 122, 95, 0.03);
+  stroke: rgba(224, 122, 95, 0.3);
+}
+
+.axis-line {
+  stroke: var(--text-muted);
+  stroke-width: 1;
+  opacity: 0.4;
+}
+
+.wave-line {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.5s;
+}
+
+.sku-cluster-point {
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), fill 0.4s;
+}
+
+/* --- PIPELINE GRID --- */
+.pipeline-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.pipeline-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 20px;
+  transition: all 0.3s;
+}
+
+.pipeline-card:hover {
+  border-color: var(--brand);
+  transform: translateY(-2px);
+}
+
+.card-num {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--brand);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.card-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.math-stat {
+  font-family: var(--font-mono);
+  color: var(--accent);
+}
+
+/* --- RESPONSIVE OVERRIDES --- */
+@media (max-width: 1024px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-left {
+    padding: 60px 24px 40px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-right {
+    padding: 40px 24px;
+  }
+
+  .kpi-section,
+  .section-header,
+  .pipeline-section,
+  footer {
+    padding: 40px 24px;
+  }
+
+  .kpi-row,
+  .pipeline-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .kpi-card {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miloš Milošević — Production Scheduling & Capacity Allocation Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&family=Roboto+Mono:wght@300;400;500&family=Roboto:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/nav.css">
+
+  <link rel="stylesheet" href="./css/production-scheduler.css">
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="./index.html" class="nav-logo-link">
+      <img src="./assets/logo23.png" alt="Logo" class="nav-logo-img">
+    </a>
+    <ul class="nav-links">
+      <li class="dropdown">
+        <a href="./index.html#projects">Projects <span class="dropdown-caret">▼</span></a>
+        <ul class="dropdown-menu">
+          <li><a href="./demand-profiler.html"><span class="menu-title">SC Demand Profiler</span><span
+                class="menu-desc">Ingestion &amp; Profiling Suite</span></a></li>
+          <li><a href="./production-scheduler.html"><span class="menu-title">Production Scheduler</span><span
+                class="menu-desc">Constraint Optimization</span></a></li>
+          <li><a href="./multi-warehouse-solver.html"><span class="menu-title">Transport Optimizer</span><span
+                class="menu-desc">Network Routing</span></a></li>
+          <li><a href="./inventory-control.html"><span class="menu-title">Inventory Framework</span><span
+                class="menu-desc">EOQ Simulations</span></a></li>
+        </ul>
+      </li>
+      <li><a href="./index.html#experience">Experience</a></li>
+      <li><a href="./index.html#stack">Stack</a></li>
+      <li><a href="./index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-status">
+      <div class="status-dot" style="background: var(--accent);"></div>Optimization Engine Active
+    </div>
+  </nav>
+
+  <!-- HERO CONTAINER -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Production Operations</div>
+      <h1 class="hero-name">Production Scheduling &<br>Capacity Allocation Engine</h1>
+      <div class="hero-title">Heuristic Sequence Optimization for Multi-Line Plants</div>
+
+      <p class="hero-desc">
+        A continuous data application designed to eliminate sequencing constraints and costly changeover bottlenecks. By
+        plotting product viscosity and matrix washdown rules against parallel work centers, it mathematically compresses
+        line idle intervals.
+      </p>
+
+      <div
+        style="background: var(--bg-surface); border: 1px solid var(--border); padding: 16px; border-radius: 4px; max-width: 460px;">
+        <span
+          style="font-family:'Roboto Mono', monospace; font-size:11px; color:var(--brand); display:block; margin-bottom:8px;">//
+          Finite Capacity Rules:</span>
+        <p style="font-size:12px; color:var(--text-secondary); line-height:1.6;">
+          • <strong style="color:var(--text-primary)">Sequence-Dependent Setup:</strong> High-to-low viscosity changes
+          trigger automated wash cycles.<br>
+          • <strong style="color:var(--text-primary)">Line Balancing Thresholds:</strong> Dynamic routing keeps line
+          loads below 88% to avoid thermal fatigue.<br>
+          • <strong style="color:var(--text-primary)">Heuristic Search:</strong> Iterative local swapping balances
+          throughput against holding constraints.
+        </p>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="scenario-header">
+        <div class="scenario-label">// Finite Horizon Execution Board</div>
+        <div class="scenario-sku-badge" id="profile-badge">SCHEDULER-INIT</div>
+      </div>
+
+      <!-- GRAPHICAL SIMULATION CORE -->
+      <div class="scenario-svg-wrap">
+
+        <!-- TOP: GANTT RESOURCE CHANNELS -->
+        <svg id="gantt-svg" viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+          <!-- Resource Tracks Background -->
+          <g id="gantt-rows">
+            <rect x="70" y="30" width="410" height="40" class="gantt-row-bg" />
+            <rect x="70" y="90" width="410" height="40" class="gantt-row-bg" />
+            <rect x="70" y="150" width="410" height="40" class="gantt-row-bg" />
+          </g>
+
+          <!-- Dynamic Operations Blocks -->
+          <g id="gantt-blocks">
+            <!-- Line 1 blocks -->
+            <rect id="blk-l1-1" x="75" y="35" width="120" height="30" class="gantt-block" />
+            <rect id="blk-l1-2" x="200" y="35" width="40" height="30" class="gantt-block" />
+            <rect id="blk-l1-3" x="245" y="35" width="230" height="30" class="gantt-block" />
+
+            <!-- Line 2 blocks -->
+            <rect id="blk-l2-1" x="75" y="95" width="160" height="30" class="gantt-block" />
+            <rect id="blk-l2-2" x="240" y="95" width="90" height="30" class="gantt-block" />
+            <rect id="blk-l2-3" x="335" y="95" width="140" height="30" class="gantt-block" />
+
+            <!-- Line 3 blocks -->
+            <rect id="blk-l3-1" x="75" y="155" width="90" height="30" class="gantt-block" />
+            <rect id="blk-l3-2" x="170" y="155" width="180" height="30" class="gantt-block" />
+            <rect id="blk-l3-3" x="355" y="155" width="120" height="30" class="gantt-block" />
+          </g>
+
+          <!-- Resource Axis Typography Labels -->
+          <g font-family="'Ubuntu',sans-serif" font-size="10" fill="var(--text-secondary)" font-weight="500">
+            <text x="10" y="54">Line Alpha</text>
+            <text x="10" y="114">Line Beta</text>
+            <text x="10" y="174">Line Gamma</text>
+          </g>
+
+          <!-- Timeline Tick Indicators -->
+          <g font-family="'Roboto Mono',monospace" font-size="8" fill="var(--text-muted)" text-anchor="middle">
+            <text x="75" y="210">00:00</text>
+            <text x="177" y="210">06:00</text>
+            <text x="280" y="210">12:00</text>
+            <text x="382" y="210">18:00</text>
+            <text x="480" y="210">24:00</text>
+          </g>
+        </svg>
+
+        <!-- BOTTOM: LOAD PROFILE PROFILE STRIP -->
+        <svg id="load-svg" viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg">
+          <line x1="10" y1="90" x2="490" y2="90" class="axis-line" />
+          <line x1="10" y1="10" x2="10" y2="90" class="axis-line" />
+
+          <!-- Load Columns Profile -->
+          <g id="load-profile">
+            <rect id="bar-1" x="30" y="40" width="35" height="50" class="load-bar" />
+            <rect id="bar-2" x="85" y="25" width="35" height="65" class="load-bar" />
+            <rect id="bar-3" x="140" y="55" width="35" height="35" class="load-bar" />
+            <rect id="bar-4" x="195" y="15" width="35" height="75" class="load-bar" />
+            <rect id="bar-5" x="250" y="35" width="35" height="55" class="load-bar" />
+            <rect id="bar-6" x="305" y="60" width="35" height="30" class="load-bar" />
+            <rect id="bar-7" x="360" y="20" width="35" height="70" class="load-bar" />
+            <rect id="bar-8" x="415" y="45" width="35" height="45" class="load-bar" />
+          </g>
+        </svg>
+
+        <!-- TELEMETRY DISPLAY PANEL -->
+        <div class="scenario-log" id="telemetry-panel">
+          <div class="log-line" id="tel-l1">// Initializing heuristic routing matrix vectors...</div>
+          <div class="log-line" id="tel-l2" style="display: flex; gap: 24px; margin-top: 4px;">
+            <span>OEE: <span id="val-oee" class="math-stat">0.0%</span></span>
+            <span>Setup Overheads: <span id="val-setup" class="math-stat">0h</span></span>
+            <span>Throughput: <span id="val-thru" class="math-stat">0</span> L/hr</span>
+          </div>
+          <div class="log-line" id="tel-l3" style="margin-top: 4px; color: var(--text-secondary);"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATISTICAL LAYER KPI BLOCK -->
+  <div class="kpi-section" id="logic">
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-label">Algorithmic Core</div>
+        <div class="kpi-value">Viscosity-Sequence Cost Matrix</div>
+        <div class="kpi-sub">Maps penalty delays between formulations to minimize flush cycles</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Variable Constraints</div>
+        <div class="kpi-value">Parallel Non-Identical Units</div>
+        <div class="kpi-sub">Balances individual line mechanical speed capabilities dynamically</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Operational Benefit</div>
+        <div class="kpi-value">Changeover Downtime Reduction</div>
+        <div class="kpi-sub">Slashes setup-related production leakage by up to 18%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SYSTEM PIPELINE SECTION -->
+  <section id="pipeline" class="section-header">
+    <div class="section-eyebrow">Processing Sequence</div>
+    <h2 class="section-title">Order Backlog to Automated Dispatch Schedule</h2>
+  </section>
+
+  <div class="pipeline-section">
+    <div class="pipeline-grid">
+      <div class="pipeline-card">
+        <span class="card-num">01 / DEMAND POOL INGEST</span>
+        <h3 class="card-title">Validate & Sort</h3>
+        <p class="card-desc">Extracts unfulfilled batch quantities from raw database tables and flattens dependencies
+          into routing vectors.</p>
+      </div>
+      <div class="pipeline-card">
+        <span class="card-num">02 / MATRIX COST CALCULATION</span>
+        <h3 class="card-title">Setup Optimization</h3>
+        <p class="card-desc">Computes multi-dimensional washdown arrays using fast matrix math loops before executing
+          allocation passes.</p>
+      </div>
+      <div class="pipeline-card">
+        <span class="card-num">03 / PARALLEL ROUTING PASS</span>
+        <h3 class="card-title">Load Swapping Iterations</h3>
+        <p class="card-desc">Shuffles order strings across alternative lines to balance runtimes and maintain safe
+          equipment buffers.</p>
+      </div>
+      <div class="pipeline-card">
+        <span class="card-num">04 / DISPATCH COMPILATION</span>
+        <h3 class="card-title">Gantt Generation</h3>
+        <p class="card-desc">Converts optimized matrix points into localized shop floor execution lists to guide
+          operators error-free.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-copy">&copy; 2026 Miloš Milošević. Built for systems integrity.</div>
+    <div class="footer-links">
+      <a href="https://github.com/milosevicmilos23e" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/miloš-milošević-b44122116" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+    // --- OPERATIONS METRIC CONFIGURATION ---
+    const schedulingPhases = [
+      {
+        badge: "BATCH-COMPILING // HEURISTIC",
+        focusedBlocks: { "blk-l1-2": "gantt-block active-setup", "blk-l2-2": "gantt-block active-setup", "blk-l3-2": "gantt-block active-setup" },
+        barHeights: [45, 60, 40, 70, 50, 35, 65, 40],
+        oee: "74.2%", setup: "5.5h", thru: "11,200",
+        l1: "[ANALYSIS] Heavy grade transitions detected across all filling lines.",
+        l3: "» Condition: High setup cost penalties active. Running sequence minimization algorithms.",
+        barColor: "var(--accent)"
+      },
+      {
+        badge: "BOTTLENECK-DETECTED // ALERT",
+        focusedBlocks: { "blk-l1-1": "gantt-block active-bottleneck", "blk-l1-2": "gantt-block", "blk-l1-3": "gantt-block", "blk-l2-1": "gantt-block active-bottleneck" },
+        barHeights: [85, 90, 30, 20, 25, 15, 30, 25],
+        oee: "68.1%", setup: "7.0h", thru: "9,450",
+        l1: "[OVERLOAD] Line Alpha capacity threshold exceeded at hour interval 04:00.",
+        l3: "» Condition: Structural line starvation on Line Beta. Initiating cross-resource workload swaps.",
+        barColor: "var(--alert)"
+      },
+      {
+        badge: "SCHEDULE-OPTIMIZED // STABLE",
+        focusedBlocks: { "blk-l1-1": "gantt-block active-run", "blk-l1-3": "gantt-block active-run", "blk-l2-3": "gantt-block active-run", "blk-l3-3": "gantt-block active-run" },
+        barHeights: [55, 52, 58, 54, 56, 50, 55, 53],
+        oee: "86.5%", setup: "1.8h", thru: "14,100",
+        l1: "[CONVERGENCE] Heuristic equilibrium established. Uniform resource profile.",
+        l3: "» Profile: Setup sequences optimized. Minimum wash cycles achieved. Dispatch sheets compiled.",
+        barColor: "var(--brand)"
+      }
+    ];
+
+    let currentPhaseIdx = 0;
+
+    function runSchedulerLoop() {
+      const config = schedulingPhases[currentPhaseIdx];
+
+      // Reset all Gantt block classes to nominal state
+      document.querySelectorAll('.gantt-block').forEach(b => {
+        b.className.baseVal = "gantt-block";
+      });
+
+      // Inject specialized tracking classes for specific blocks
+      Object.keys(config.focusedBlocks).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.className.baseVal = config.focusedBlocks[id];
+      });
+
+      // Mutate capacity utilization profile columns
+      config.barHeights.forEach((h, i) => {
+        const bar = document.getElementById(`bar-${i + 1}`);
+        if (bar) {
+          bar.setAttribute("height", h);
+          bar.setAttribute("y", 90 - h);
+          bar.style.fill = config.barColor;
+        }
+      });
+
+      // Update operational telemetry cards
+      document.getElementById("profile-badge").textContent = config.badge;
+      document.getElementById("profile-badge").style.color = config.barColor;
+      document.getElementById("profile-badge").style.borderColor = config.barColor;
+
+      document.getElementById("tel-l1").textContent = config.l1;
+      document.getElementById("tel-l1").className = "log-line";
+      if (config.barColor === "var(--brand)") document.getElementById("tel-l1").classList.add("highlight-brand");
+      if (config.barColor === "var(--accent)") document.getElementById("tel-l1").classList.add("highlight-accent");
+      if (config.barColor === "var(--alert)") document.getElementById("tel-l1").classList.add("highlight-alert");
+
+      document.getElementById("val-oee").textContent = config.oee;
+      document.getElementById("val-setup").textContent = config.setup;
+      document.getElementById("val-thru").textContent = config.thru;
+      document.getElementById("tel-l3").textContent = config.l3;
+
+      // Advance loop state pointer
+      currentPhaseIdx = (currentPhaseIdx + 1) % schedulingPhases.length;
+      setTimeout(runSchedulerLoop, 5000);
+    }
+
+    // Engage parsing pipeline on initial window render
+    window.addEventListener("load", () => {
+      setTimeout(runSchedulerLoop, 400);
+    });
+  </script>
+</body>
+
+</html>

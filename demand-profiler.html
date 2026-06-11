@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miloš Milošević - Demand Profiling & Segmentation Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&family=Roboto+Mono:wght@300;400;500&family=Roboto:wght@300;400;500&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/nav.css">
+  <link rel="stylesheet" href="./css/demand-profiler.css">
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="./index.html" class="nav-logo-link">
+      <img src="./assets/logo23.png" alt="Logo" class="nav-logo-img">
+    </a>
+    <ul class="nav-links">
+      <li class="dropdown">
+        <a href="./index.html#projects">Projects <span class="dropdown-caret">▼</span></a>
+        <ul class="dropdown-menu">
+          <li><a href="./demand-profiler.html"><span class="menu-title">SC Demand Profiler</span><span
+                class="menu-desc">Ingestion &amp; Profiling Suite</span></a></li>
+          <li><a href="./production-scheduler.html"><span class="menu-title">Production Scheduler</span><span
+                class="menu-desc">Constraint Optimization</span></a></li>
+          <li><a href="./multi-warehouse-solver.html"><span class="menu-title">Transport Optimizer</span><span
+                class="menu-desc">Network Routing</span></a></li>
+          <li><a href="./inventory-control.html"><span class="menu-title">Inventory Framework</span><span
+                class="menu-desc">EOQ Simulations</span></a></li>
+        </ul>
+      </li>
+      <li><a href="./index.html#experience">Experience</a></li>
+      <li><a href="./index.html#stack">Stack</a></li>
+      <li><a href="./index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-status">
+      <div class="status-dot"></div>Profiler Engine Standby
+    </div>
+  </nav>
+
+  <!-- HERO CONTAINER -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Inventory Intelligence</div>
+      <h1 class="hero-name">Demand Profiler &<br>Segmentation Tool</h1>
+      <div class="hero-title">Mathematical SKU Stream Classification</div>
+
+      <p class="hero-desc">
+        A structural data application built to separate mathematical signal from transactional noise. By plotting item
+        velocity against variance boundaries, it automatically isolates predictable run-rates from volatile, tail-end
+        spikes to protect cash flow.
+      </p>
+
+      <div
+        style="background: var(--bg-surface); border: 1px solid var(--border); padding: 16px; border-radius: 4px; max-width: 460px;">
+        <span
+          style="font-family:'Roboto Mono', monospace; font-size:11px; color:var(--brand); display:block; margin-bottom:8px;">//
+          Core Classification Thresholds:</span>
+        <p style="font-size:12px; color:var(--text-secondary); line-height:1.6;">
+          • <strong style="color:var(--text-primary)">Smooth (AX/BX):</strong> ADI &lt; 1.32, CV² &lt; 0.49. High
+          stability.<br>
+          • <strong style="color:var(--text-primary)">Erratic (AY/BY):</strong> ADI &lt; 1.32, CV² ≥ 0.49. High
+          variance.<br>
+          • <strong style="color:var(--text-primary)">Lumpy (CZ):</strong> ADI ≥ 1.32, CV² ≥ 0.49. Highly intermittent.
+        </p>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="scenario-header">
+        <div class="scenario-label">// Real-Time Statistical Profiler Console</div>
+        <div class="scenario-sku-badge" id="profile-badge">ENGINE-READY</div>
+      </div>
+
+      <!-- GRAPHICAL SIMULATION CORE -->
+      <div class="scenario-svg-wrap">
+
+        <!-- TOP: 9-BOX MATRIX MAP -->
+        <svg id="matrix-svg" viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+          <!-- Matrix Grid Group -->
+          <g id="matrix-grid">
+            <!-- Column X -->
+            <rect id="cell-AX" x="50" y="20" width="100" height="50" class="matrix-cell" />
+            <rect id="cell-BX" x="50" y="80" width="100" height="50" class="matrix-cell" />
+            <rect id="cell-CX" x="50" y="140" width="100" height="50" class="matrix-cell" />
+            <!-- Column Y -->
+            <rect id="cell-AY" x="160" y="20" width="100" height="50" class="matrix-cell" />
+            <rect id="cell-BY" x="160" y="80" width="100" height="50" class="matrix-cell" />
+            <rect id="cell-CY" x="160" y="140" width="100" height="50" class="matrix-cell" />
+            <!-- Column Z -->
+            <rect id="cell-AZ" x="270" y="20" width="100" height="50" class="matrix-cell" />
+            <rect id="cell-BZ" x="270" y="80" width="100" height="50" class="matrix-cell" />
+            <rect id="cell-CZ" x="270" y="140" width="100" height="50" class="matrix-cell" />
+          </g>
+
+          <!-- Cell Typography Labels -->
+          <g font-family="'Roboto Mono',monospace" font-size="10" fill="var(--text-muted)" font-weight="500"
+            pointer-events="none">
+            <text x="95" y="50" text-anchor="middle">AX</text><text x="205" y="50" text-anchor="middle">AY</text><text
+              x="315" y="50" text-anchor="middle">AZ</text>
+            <text x="95" y="110" text-anchor="middle">BX</text><text x="205" y="110" text-anchor="middle">BY</text><text
+              x="315" y="110" text-anchor="middle">BZ</text>
+            <text x="95" y="170" text-anchor="middle">CX</text><text x="205" y="170" text-anchor="middle">CY</text><text
+              x="315" y="170" text-anchor="middle">CZ</text>
+          </g>
+
+          <!-- Row/Col Axis Indicators -->
+          <g font-family="'Ubuntu',sans-serif" font-size="9" fill="var(--text-secondary)">
+            <text x="15" y="48" font-weight="500">A (High)</text>
+            <text x="15" y="108" font-weight="500">B (Med)</text>
+            <text x="15" y="168" font-weight="500">C (Low)</text>
+
+            <text x="100" y="205" text-anchor="middle">X (Stable)</text>
+            <text x="210" y="205" text-anchor="middle">Y (Volatile)</text>
+            <text x="320" y="205" text-anchor="middle">Z (Lumpy)</text>
+          </g>
+
+          <!-- Dynamic Live SKU Cluster Tracker Dot -->
+          <circle id="sku-pointer" cx="100" cy="50" r="6" fill="var(--brand)"
+            filter="drop-shadow(0px 0px 4px var(--brand))" class="sku-cluster-point" />
+        </svg>
+
+        <!-- BOTTOM: LIVE HISTORICAL TIME-SERIES STREAM -->
+        <svg id="wave-svg" viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg">
+          <line x1="10" y1="90" x2="490" y2="90" class="axis-line" />
+          <line x1="10" y1="10" x2="10" y2="90" class="axis-line" />
+          <path id="demand-wave" d="M 10,50 L 490,50" class="wave-line" stroke="var(--brand)" />
+        </svg>
+
+        <!-- TELEMETRY DISPLAY PANEL -->
+        <div class="scenario-log" id="telemetry-panel">
+          <div class="log-line" id="tel-l1">// Awaiting parsing stream pipeline connection...</div>
+          <div class="log-line id=" tel-l2" style="display: flex; gap: 24px; margin-top: 4px;">
+            <span>ADI: <span id="val-adi" class="math-stat">0.00</span></span>
+            <span>CV²: <span id="val-cv" class="math-stat">0.00</span></span>
+            <span>Volume/Yr: <span id="val-vol" class="math-stat">0</span> units</span>
+          </div>
+          <div class="log-line" id="tel-l3" style="margin-top: 4px; color: var(--text-secondary);"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATISTICAL LAYER KPI BLOCK -->
+  <div class="kpi-section" id="logic">
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-label">Mathematical Base</div>
+        <div class="kpi-value">Synthesised Categorization</div>
+        <div class="kpi-sub">Combines Pareto volume filters with Croston variance models</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Target Metrics</div>
+        <div class="kpi-value">ADI & Coefficient of Variation</div>
+        <div class="kpi-sub">Differentiates erratic waves from intermittent steps</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Operational Output</div>
+        <div class="kpi-value">Dynamic Safety Stock Scaling</div>
+        <div class="kpi-sub">Reduces inventory liabilities on erratic tails by up to 22%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SYSTEM PIPELINE SECTION -->
+  <section id="pipeline" class="section-header">
+    <div class="section-eyebrow">Processing Sequence</div>
+    <h2 class="section-title">ETL to Inventory Strategy Map</h2>
+  </section>
+
+  <div class="pipeline-section">
+    <div class="pipeline-grid">
+      <div class="pipeline-card">
+        <span class="card-num">01 / TRANSACTION INGEST</span>
+        <h3 class="card-title">Clean & Compress</h3>
+        <p class="card-desc">Pulls erratic line-item orders from raw tables and groups them into consistent weekly
+          buckets.</p>
+      </div>
+      <div class="pipeline-card">
+        <span class="card-num">02 / MATRIX ANALYSIS</span>
+        <h3 class="card-title">Statistical Parsing</h3>
+        <p class="card-desc">Calculates mathematical variance vectors directly inside vectorized arrays for quick
+          classification cycles.</p>
+      </div>
+      <div class="pipeline-card">
+        <span class="card-num">03 / 9-BOX MAPPING</span>
+        <h3 class="card-title">Profile Segmentation</h3>
+        <p class="card-desc">Slices products across value contribution limits and predictability scales simultaneously.
+        </p>
+      </div>
+      <div class="pipeline-card">
+        <span class="card-num">04 / BUFFERS ASSIGNMENT</span>
+        <h3 class="card-title">Target Parameters</h3>
+        <p class="card-desc">Passes customized stocking settings directly back to internal planning desks to eliminate
+          stockouts.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-copy">&copy; 2026 Miloš Milošević. Built for systems integrity.</div>
+    <div class="footer-links">
+      <a href="https://github.com/milosevicmilos23e" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/miloš-milošević-b44122116" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+    // --- METRIC DATA ARRAY CONFIGURATION ---
+    const profilingPhases = [
+      {
+        badge: "SKU-4021A // PROFILING",
+        cellId: "cell-AX",
+        color: "var(--brand)",
+        cx: 100, cy: 45,
+        adi: "1.04", cv: "0.14", vol: "14,250",
+        l1: "[INGEST] Processing SKU-4021A (Finished Goods Core Compound Line)",
+        l3: ">> Profile: Smooth & Predictable (AX). Recommendation: Strict Just-In-Time replenishment rules.",
+        waveFunc: () => {
+          let points = [];
+          for (let i = 0; i <= 30; i++) {
+            let x = 10 + (i * 16);
+            let y = 50 + Math.sin(i * 0.8) * 6 + (Math.random() * 4 - 2);
+            points.push(`${x},${y}`);
+          }
+          return "M " + points.join(" L ");
+        }
+      },
+      {
+        badge: "SKU-1198E // PROFILING",
+        cellId: "cell-BY",
+        color: "var(--accent)",
+        cx: 210, cy: 105,
+        adi: "1.18", cv: "0.76", vol: "4,890",
+        l1: "[INGEST] Processing SKU-1198E (Seasonal Premium Additives)",
+        l3: ">> Profile: Erratic & Fast-Moving (BY). Recommendation: Deploy dynamic safety stock buffers.",
+        waveFunc: () => {
+          let points = [];
+          for (let i = 0; i <= 30; i++) {
+            let x = 10 + (i * 16);
+            let baseWave = Math.sin(i * 0.4) * 22;
+            let noise = i % 3 === 0 ? 18 : (Math.random() * 8 - 4);
+            let y = 50 + baseWave + noise;
+            points.push(`${x},${y}`);
+          }
+          return "M " + points.join(" L ");
+        }
+      },
+      {
+        badge: "SKU-8842Z // PROFILING",
+        cellId: "cell-CZ",
+        color: "var(--alert)",
+        cx: 320, cy: 165,
+        adi: "2.41", cv: "1.34", vol: "320",
+        l1: "[INGEST] Processing SKU-8842Z (Specialist Marine Lubricant Valving)",
+        l3: ">> Profile: Lumpy & Highly Intermittent (CZ). Recommendation: Run strictly on an Order-to-Order basis.",
+        waveFunc: () => {
+          let points = [];
+          for (let i = 0; i <= 30; i++) {
+            let x = 10 + (i * 16);
+            let y = 90; // Default flatline zero
+            if (i === 5) y = 15;
+            if (i === 14) y = 25;
+            if (i === 26) y = 10;
+            points.push(`${x},${y}`);
+          }
+          return "M " + points.join(" L ");
+        }
+      }
+    ];
+
+    let currentPhaseIdx = 0;
+
+    function runProfilerLoop() {
+      const config = profilingPhases[currentPhaseIdx];
+
+      // Reset cell backgrounds to nominal dark theme states
+      document.querySelectorAll('.matrix-cell').forEach(c => {
+        c.className.baseVal = "matrix-cell";
+      });
+
+      // Match focus style based on variance characteristics
+      const activeCell = document.getElementById(config.cellId);
+      if (config.cellId === "cell-AX") activeCell.className.baseVal = "matrix-cell active-cell";
+      else if (config.cellId === "cell-BY") activeCell.className.baseVal = "matrix-cell active-cell-erratic";
+      else if (config.cellId === "cell-CZ") activeCell.className.baseVal = "matrix-cell active-cell-lumpy";
+
+      // Shift cluster point tracking paths
+      const pointer = document.getElementById("sku-pointer");
+      pointer.setAttribute("cx", config.cx);
+      pointer.setAttribute("cy", config.cy);
+      pointer.setAttribute("fill", config.color);
+      pointer.style.filter = `drop-shadow(0px 0px 6px ${config.color})`;
+
+      // Transition historical wave graphs
+      const wave = document.getElementById("demand-wave");
+      wave.setAttribute("d", config.waveFunc());
+      wave.setAttribute("stroke", config.color);
+
+      // Refresh telemetry readouts
+      document.getElementById("profile-badge").textContent = config.badge;
+      document.getElementById("profile-badge").style.color = config.color;
+      document.getElementById("profile-badge").style.borderColor = config.color;
+
+      document.getElementById("tel-l1").textContent = config.l1;
+      document.getElementById("tel-l1").className = "log-line";
+      if (config.cellId === "cell-AX") document.getElementById("tel-l1").classList.add("highlight-brand");
+      if (config.cellId === "cell-BY") document.getElementById("tel-l1").classList.add("highlight-accent");
+      if (config.cellId === "cell-CZ") document.getElementById("tel-l1").classList.add("highlight-alert");
+
+      document.getElementById("val-adi").textContent = config.adi;
+      document.getElementById("val-cv").textContent = config.cv;
+      document.getElementById("val-vol").textContent = config.vol;
+      document.getElementById("tel-l3").textContent = config.l3;
+
+      // Advance loop state counter
+      currentPhaseIdx = (currentPhaseIdx + 1) % profilingPhases.length;
+      setTimeout(runProfilerLoop, 5000);
+    }
+
+    // Engage parsing pipeline on initial window render
+    window.addEventListener("load", () => {
+      setTimeout(runProfilerLoop, 400);
+    });
+  </script>
+</body>
+
+</html>
