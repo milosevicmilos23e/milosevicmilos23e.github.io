@@ -11,13 +11,39 @@
     rel="stylesheet">
   <link rel="stylesheet" href="./css/base.css">
   <link rel="stylesheet" href="./css/nav.css">
-
   <link rel="stylesheet" href="./css/production-scheduler.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden; /* Prevents double scrollbars */
+      background-color: #000; /* Optional: smooth dark backdrop during load */
+    }
+
+    .powerbi-frame {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      display: block;
+    }
+  </style>
 </head>
 
 <body>
 
-<iframe title="Supply Chain Monthly Agenda" width="1140" height="541.25" src="https://app.fabric.microsoft.com/reportEmbed?reportId=db6a3ad3-61fd-4ea7-873a-0ceec84f8cf4&autoAuth=true&ctid=501657db-01ff-495c-894e-2d0f1cf26fcc" frameborder="0" allowFullScreen="true"></iframe>
+  <iframe 
+    class="powerbi-frame"
+    title="Supply Chain Monthly Agenda" 
+    src="https://app.fabric.microsoft.com/reportEmbed?reportId=db6a3ad3-61fd-4ea7-873a-0ceec84f8cf4&autoAuth=true&ctid=501657db-01ff-495c-894e-2d0f1cf26fcc" 
+    allowFullScreen="true">
+  </iframe>
 
 </body>
 </html>
